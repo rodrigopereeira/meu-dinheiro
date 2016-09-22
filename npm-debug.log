@@ -19,7 +19,7 @@
 9 verbose stack     at Process.ChildProcess._handle.onexit (child_process.js:1091:5)
 10 verbose pkgid meu-dinheiro@1.0.0
 11 verbose cwd /home/rodrigo/projetos/meu-dinheiro
-12 error Linux 4.4.0-36-generic
+12 error Linux 4.4.0-38-generic
 13 error argv "/home/rodrigo/.nvm/versions/node/v0.12.15/bin/node" "/home/rodrigo/.nvm/versions/node/v0.12.15/bin/npm" "start"
 14 error node v0.12.15
 15 error npm  v2.15.1

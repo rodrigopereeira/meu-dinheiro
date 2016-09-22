@@ -4,6 +4,9 @@ var bodyParser = require('body-parser');
 
 var app = express();
 
+var port = process.env.PORT || 3000;
+
+
 app.use(express.static('./public'));
 app.use(bodyParser.json());
 
@@ -11,3 +14,8 @@ app.use(bodyParser.json());
 
 //criando modulo para acesso externo
 module.exports = app;
+
+
+app.listen(port, function() {
+    console.log('Our app is running on http://localhost:' + port);
+});
