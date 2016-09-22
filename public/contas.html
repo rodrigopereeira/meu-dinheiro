@@ -1,0 +1,287 @@
+<!doctype html>
+<!--
+  Material Design Lite
+  Copyright 2015 Google Inc. All rights reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License
+-->
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Account Pay</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="images/android-desktop.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+    <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="shortcut icon" href="images/favicon.png">
+
+    <script type="text/javascript" src="lib/jquery/jquery-3.1.0.min.js"></script>
+    <script src="lib/materialize/materialize.min.js"></script>
+    <script src="lib/material/material.min.js"></script>
+    <script src="lib/angular/angular.min.js"></script>
+    <script src="lib/materialize-angular/angular-materialize.min.js"></script>
+    <script src="js/script.js"></script>
+
+    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+    <!--
+    <link rel="canonical" href="http://www.example.com/">
+    -->
+
+    <link href="lib/fonts/fonts.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="lib/materialize/materialize.css" media="screen,projection" />
+    <link rel="stylesheet" href="lib/material/material.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        h6 {
+            margin: 0;
+        }
+
+        .div-expand {
+            background-color: white;
+        }
+
+        #view-source {
+            position: fixed;
+            display: block;
+            right: 0;
+            bottom: 0;
+            margin-right: 40px;
+            margin-bottom: 40px;
+            z-index: 900;
+        }
+
+        .block {
+            display: block !important;
+            ;
+        }
+
+        .borda {
+            border: solid 1px red;
+        }
+    </style>
+</head>
+
+<body ng-app="contas" ng-controller="contasController">
+
+    <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+        <header class="demo-header mdl-layout__header  mdl-color-text--grey-600">
+            <div class="mdl-layout__header-row">
+                <div class="mdl-layout-spacer"></div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+                    <div class="mdl-textfield__expandable-holder">
+                        <input class="mdl-textfield__input" type="text" id="search">
+                        <label class="mdl-textfield__label" for="search">Pesquisar...</label>
+                    </div>
+                </div>
+                <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
+                  <img src="images/rodrigo.jpg" class="demo-avatar">
+                </button>
+                <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
+                    <li class="mdl-menu__item">Sobre</li>
+                    <li class="mdl-menu__item">Contato</li>
+                </ul>
+            </div>
+        </header>
+        <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+            <header class="demo-drawer-header">
+                <h6 style="padding: 0 40px;line-height: 50px;">  Meu Dinheiro</h6>
+                <div class="mdl-layout-spacer"></div>
+            </header>
+            <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
+                <a class="mdl-navigation__link" href="index.html"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Início</a>
+                <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">account_balance</i>Contas</a>
+                <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">event_available</i>Agenda</a>
+            </nav>
+        </div>
+
+        <!-- Modal Structure -->
+        <div id="demoModal" class="modal modal-l">
+            <div class="modal-content">
+                <form class="col s12">
+                    <h4>Cadastrar conta</h4>
+                    <div class="row">
+                        <div class="col s3 m3 l2">
+                            <p>
+                                <input name="group1" type="radio" id="pagar" />
+                                <label for="pagar">Pagar</label>
+                            </p>
+                            <input name="group1" type="radio" id="receber" />
+                            <label for="receber">Receber</label>
+
+                        </div>
+                        <div class="input-field col s9 m4 l4">
+                            <input id="description" type="text" class="validate">
+                            <label for="description">Descrição</label>
+                        </div>
+                        <div class="input-field col s6 m2 l3">
+                            <input id="price" type="text" class="validate">
+                            <label for="price">Valor</label>
+                        </div>
+                        <div class="input-field col s6 m3 l3">
+                            <label for="inputCreated">Data</label>
+                            <input input-date type="text" name="created" id="inputCreated" ng-model="currentTime" container="" format="dd/mm/yyyy" months-full="{{ month }}" months-short="{{ monthShort }}" weekdays-full="{{ weekdaysFull }}" weekdays-short="{{ weekdaysShort }}" weekdays-letter="{{ weekdaysLetter }}"
+                                disable="disable" min="{{ minDate }}" max="{{ maxDate }}" today="today" first-day="1" clear="clear" close="close" select-years="15" on-start="onStart()" on-render="onRender()" on-open="onOpen()" on-close="onClose()" on-set="onSet()"
+                                on-stop="onStop()" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s5 m5 l4" input-field>
+                            <select class="" ng-model="select.value1" material-select watch>
+                              <option value="" selected>Selecione a conta</option>
+                              <option ng-repeat="value in contas">{{value.name}}</option>
+                          </select>
+                            <label>Conta</label>
+                        </div>
+                        <div class="col s5 m5 l4" input-field>
+                            <select class="" ng-model="select.value1" material-select watch>
+                              <option value="" selected>Selecione o tipo</option>
+                              <option ng-repeat="value in tipos">{{value.name}}</option>
+                          </select>
+                            <label>Tipo</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="password" type="password" class="validate">
+                            <label for="password">Password</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="email" type="email" class="validate">
+                            <label for="email">Email</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+            </div>
+        </div>
+
+        <main class="mdl-layout__content mdl-color--grey-100" style="height:620px;">
+            <div class="row ">
+
+                <div class="col s12">
+                    <a ng-click="expand();" class="waves-effect waves-light btn">Filtrar <i class="large material-icons right">arrow_drop_down</i></a>
+
+                    <div class="card-panel" ng-show="show">
+                        <div class="row no-margin">
+                            <div class="col s6 m4 l2">
+                                <h6>Contas</h6>
+
+                                <input type="checkbox" class="filled-in section" id="todos" checked="checked" />
+                                <label class="block" for="todos">Todos</label>
+
+                                <input type="checkbox" class="filled-in" id="santander" checked="checked" />
+                                <label class="block" for="santander">Santander</label>
+
+
+                                <input type="checkbox" class="filled-in" id="bancoBrasil" checked="checked" />
+                                <label class="block" for="bancoBrasil">Banco do Brasil</label>
+
+                                <input type="checkbox" class="filled-in" id="nubank" checked="checked" />
+                                <label class="block" for="nubank">NuBank</label>
+
+                                <input type="checkbox" class="filled-in" id="pessoal" checked="checked" />
+                                <label class="block" for="pessoal">Pessoal</label>
+                            </div>
+                            <div class="col s6 m4 l2 ">
+                                <h6>Período</h6>
+
+                                <label for="inputCreated">Data Inicial</label>
+                                <input input-date type="text"  ng-model="currentTime1" format="dd/mm/yyyy" first-day="1" today="Hoje" clear="Limpar" close="Fechar" />
+
+                                <label for="inputCreated">Data Final</label>
+                                <input input-date type="text"  ng-model="currentTime2" format="dd/mm/yyyy" first-day="1" today="Hoje" clear="Limpar" close="Fechar" />
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row ">
+
+                <div class="col s12">
+                    <ul tabs reload="allTabContentLoaded">
+                        <li class="tab col s3"><a class="active" href="#test1">Contas a pagar</a></li>
+                        <li class="tab col s3"><a href="#test2">Contas a receber</a></li>
+                    </ul>
+                </div>
+                <div id="test1" class="col s12 ">
+                    <table class="bordered white">
+                        <thead>
+                            <tr>
+                                <th data-field="ver">Ver</th>
+                                <th data-field="id">Descrição</th>
+                                <th data-field="name">Conta</th>
+                                <th data-field="price">Valor</th>
+                                <th data-field="pago">Pago</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="centraliza"><i class="material-icons teal-text">remove_red_eye</i></td>
+                                <td>Compras no Mercado</td>
+                                <td>NuBank</td>
+                                <td>R$22,50</td>
+                                <td class="centraliza"><input type="checkbox" class="filled-in" id="cs2" checked="checked" /> <label class="centraliza-checkbox" for="cs2"></label></td>
+                            </tr>
+                            <tr>
+                                <td class="centraliza"><i class="material-icons teal-text">remove_red_eye</i></td>
+                                <td>Pagamento Cartão</td>
+                                <td>Santander</td>
+                                <td>R$350,00</td>
+                                <td class="centraliza"><input type="checkbox" class="filled-in" id="cs2" checked="checked" /> <label class="centraliza-checkbox" for="cs2"></label></td>
+                            </tr>
+                            <tr>
+                                <td class="centraliza"><i class="material-icons teal-text">remove_red_eye</i></td>
+                                <td>Gasolina</td>
+                                <td>NuBank</td>
+                                <td>R$12,00</td>
+                                <td class="centraliza"><input type="checkbox" class="filled-in" id="cs2" checked="checked" /> <label class="centraliza-checkbox" for="cs2"></label></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                <div id="test2" class="col s12">Test 2</div>
+
+
+            </div>
+
+            <div class="fixed-action-btn" style="bottom: 20px; right: 25px;">
+                <a class="btn-floating btn-large waves-effect waves-light red" href='#demoModal' modal> <i class="material-icons">add</i></a>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

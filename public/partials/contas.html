@@ -1,0 +1,134 @@
+<!-- Modal Structure -->
+<div id="demoModal" class="modal modal-l">
+    <div class="modal-content">
+        <form class="col s12">
+            <h4>Cadastrar conta</h4>
+            <div class="row">
+                <div class="col s3 m3 l2">
+                    <p>
+                        <input name="group1" type="radio" id="pagar" />
+                        <label for="pagar">Pagar</label>
+                    </p>
+                    <input name="group1" type="radio" id="receber" />
+                    <label for="receber">Receber</label>
+
+                </div>
+                <div class="input-field col s9 m4 l4">
+                    <input id="description" type="text" class="validate">
+                    <label for="description">Descrição</label>
+                </div>
+                <div class="input-field col s6 m2 l3">
+                    <input id="price" type="text" class="validate">
+                    <label for="price">Valor</label>
+                </div>
+                <div class="input-field col s6 m3 l3">
+                    <label for="inputCreated">Data</label>
+                    <input input-date type="text" name="created" id="inputCreated" ng-model="currentTime" container="" format="dd/mm/yyyy"
+                        disable="disable"today="today" first-day="1" clear="limpar" close="fechar"
+                        on-stop="onStop()" />
+                </div>
+            </div>
+            <div class="row">
+              <div class="col s5 m5 l4" input-field>
+                  <select ng-model="select.value3" material-select watch>
+                      <option value="" selected>Selecione o tipo</option>
+                      <option ng-repeat="tipo in tipoGasto">{{tipo.description}}</option>
+                  </select>
+                  <label>Tipo</label>
+              </div>
+                <div class="col s5 m5 l4" input-field>
+                    <select class="" ng-model="select.value2" material-select watch>
+                        <option value="" selected>Selecione a conta</option>
+                        <option ng-repeat="conta in contas">{{conta.description}}</option>
+                    </select>
+                    <label>Conta</label>
+                </div>
+                <div class="col s5 m5 l4" input-field>
+                    <select ng-model="select.value3" material-select watch>
+                        <option value="" selected>Selecione o tipo</option>
+                        <option ng-repeat="tipo in tipoGasto">{{tipo.description}}</option>
+                    </select>
+                    <label>Tipo</label>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+</div>
+<div class="row ">
+
+    <div class="col s12">
+
+        <a ng-click="expand();" class="waves-effect waves-light btn">Filtros <i class="large material-icons right">arrow_drop_down</i></a>
+
+        <div class="card-panel" ng-show="show">
+            <div class="row no-margin">
+                <div class="col s6 m4 l2">
+                    <h6>Contas</h6>
+
+                    <input type="checkbox" ng-model="selectedAll" class="filled-in section" id="todos" />
+                    <label class="block" for="todos" ng-click="checkAll(); ">Todos</label>
+
+                    <div ng-repeat="conta in contas track by $index">
+                        <input type="checkbox" ng-model="conta.selected" class="filled-in" id="{{$index}}" />
+                        <label class="block" for="{{$index}}">{{conta.description}}</label>
+                    </div>
+
+                </div>
+                <div class="col s6 m4 l2 ">
+                    <h6>Período</h6>
+
+                    <label for="inputCreated">Data Inicial</label>
+                    <input input-date type="text" ng-model="currentTime1" format="dd/mm/yyyy" first-day="1" today="Hoje" clear="Limpar" close="Fechar" />
+
+                    <label for="inputCreated">Data Final</label>
+                    <input input-date type="text" ng-model="currentTime2" format="dd/mm/yyyy" first-day="1" today="Hoje" clear="Limpar" close="Fechar" />
+
+                </div>
+                <div class="col s12 m12 l12 ">
+                    <hr />
+                    <a class="waves-effect waves-light btn green lighten-1">Filtrar <i class="material-icons right">filter_list</i></a>
+                    <a class="waves-effect waves-light btn red lighten-1">Limpar <i class="material-icons right">clear</i></a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="col s12" style="margin-top:10px;">
+    <ul tabs reload="allTabContentLoaded">
+        <li class="tab col s3"><a class="active" href="#contasPagarTab">Contas a pagar</a></li>
+        <li class="tab col s3"><a href="#contasReceberTab">Contas a receber</a></li>
+    </ul>
+</div>
+<div id="contasPagarTab" class="col s12 ">
+    <ul class="collection">
+        <li ng-repeat="gasto in gastos" class="collection-item avatar gasto" ng-click="select(gasto)">
+            <i class="material-icons circle" ng-class="{'green': gasto.pay, 'red': !gasto.pay}">{{gasto.tipogasto.id | filtroTipoGasto}}</i>
+            <span class="title">{{gasto.description}}</span>
+            <p class="description">
+                {{gasto.conta.description}}
+            </p>
+            <p class="valor">
+                {{gasto.value | currency}}
+            </p>
+            <a class="secondary-content"><input type="checkbox" ng-model="gasto.selected" class="filled-in" /> <label></label></a>
+        </li>
+    </ul>
+    <a class="waves-effect waves-light btn light-green" ng-click="pagarSelecionados(gastos);"><i class="material-icons left">payment</i>Pagar</a>
+    <a class="waves-effect waves-light btn light-blue" ng-click="liberarSelecionados(gastos);"><i class="material-icons left">undo</i>Liberar</a>
+    <a class="waves-effect waves-light btn red lighten-1" ng-click="apagarSelecionados(gastos);"><i class="material-icons left">delete</i>Apagar</a>
+
+</div>
+<div id="contasReceberTab" class="col s12">
+
+</div>
+
+<div class="fixed-action-btn" style="bottom: 20px; right: 25px;">
+    <a class="btn-floating btn-large waves-effect waves-light red" href='#demoModal' modal> <i class="material-icons">add</i></a>
+</div>
