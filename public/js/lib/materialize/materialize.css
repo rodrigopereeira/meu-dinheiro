@@ -3961,7 +3961,7 @@ button.btn-floating {
 
 @media only screen and (max-width: 600px) {
   .modal-s {
-    width: 75%; } }
+    width: 90%; } }
 @media only screen and (min-width: 601px) {
   .modal-s {
     width: 400px; } }
