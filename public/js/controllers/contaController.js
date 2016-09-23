@@ -1,8 +1,30 @@
 angular.module('meudinheiro').controller('contaController', function($scope, banco) {
 
+    $scope.today = 'Hoje';
+    $scope.clear = 'Limpar';
+    $scope.close = 'Fechar';
+
+    $scope.conta = {};
+
+    $scope.filtraPagar = function (gasto) {
+        return gasto.tipoConta.id == 1;
+    };
+
+    $scope.filtraReceber = function (gasto) {
+        return gasto.tipoConta.id == 2;
+    };
+
     $scope.tipoGasto = banco.getTiposGasto();
+    $scope.tipoConta = banco.getTipoConta();
+
     $scope.contas = banco.getContas();
     $scope.gastos = banco.getGastos();
+
+    $scope.cadastrarConta = function(conta) {
+
+        banco.adicionaGasto(angular.copy(conta));
+        $scope.gastos = banco.getGastos();
+    }
 
     $scope.checkAll = function() {
         if ($scope.selectedAll) {
@@ -17,14 +39,14 @@ angular.module('meudinheiro').controller('contaController', function($scope, ban
 
     };
 
-    $scope.open = function () {
-      console.log("OPENN");
-      //demoModal
-      var modal = document.getElementById('demoModal');
-      document.body.appendChild(modal);
+    $scope.open = function() {
+        console.log("OPENN");
+        //demoModal
+        var modal = document.getElementById('demoModal');
+        document.body.appendChild(modal);
 
-      //document.appendChild(element)
-      console.log(modal);
+        //document.appendChild(element)
+        console.log(modal);
     }
 
     $scope.show = false;
