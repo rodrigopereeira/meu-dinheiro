@@ -136,12 +136,16 @@ textarea.materialize-textarea {
   }
 
   position: relative;
-  margin-top: 1rem;
+  margin-top: 1.7rem;
+
+  @media #{$small-and-down} {
+    margin-top: 2rem;
+  }
 
   label {
     color: $input-border-color;
     position: absolute;
-    top: -0.2rem;
+    top: 0rem;
     font-size: 1rem;
     cursor: text;
     transition: .2s ease-out;

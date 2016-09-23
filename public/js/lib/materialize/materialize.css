@@ -3949,6 +3949,26 @@ button.btn-floating {
   .modal-l {
     width: 900px; } }
 
+@media only screen and (max-width: 600px) {
+  .modal-m {
+    width: 75%; } }
+@media only screen and (min-width: 601px) {
+  .modal-m {
+    width: 500px; } }
+@media only screen and (min-width: 993px) {
+  .modal-m {
+    width: 750px; } }
+
+@media only screen and (max-width: 600px) {
+  .modal-s {
+    width: 75%; } }
+@media only screen and (min-width: 601px) {
+  .modal-s {
+    width: 400px; } }
+@media only screen and (min-width: 993px) {
+  .modal-s {
+    width: 600px; } }
+
 .lean-overlay {
   position: fixed;
   z-index: 999;
@@ -4434,16 +4454,19 @@ textarea.materialize-textarea {
 
 .input-field {
   position: relative;
-  margin-top: 1rem; }
+  margin-top: 1.7rem; }
   .input-field.col label {
     left: 0.75rem; }
   .input-field.col .prefix ~ label,
   .input-field.col .prefix ~ .validate ~ label {
     width: calc(100% - 3rem - 1.5rem); }
+  @media only screen and (max-width: 600px) {
+    .input-field {
+      margin-top: 2rem; } }
   .input-field label {
     color: #9e9e9e;
     position: absolute;
-    top: -0.2rem;
+    top: 0rem;
     font-size: 1rem;
     cursor: text;
     transition: .2s ease-out; }

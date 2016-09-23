@@ -59,10 +59,38 @@
   @media #{$large-and-up} {
     width: 900px
   }
-
-
-
 }
+
+.modal-m {
+
+  @media #{$small-and-down} {
+   width: 75%;
+  }
+
+  @media #{$medium-and-up} {
+   width: 500px
+  }
+
+  @media #{$large-and-up} {
+    width: 750px
+  }
+}
+
+.modal-s {
+
+  @media #{$small-and-down} {
+   width: 75%;
+  }
+
+  @media #{$medium-and-up} {
+   width: 400px
+  }
+
+  @media #{$large-and-up} {
+    width: 600px
+  }
+}
+
 
 
 .lean-overlay {
